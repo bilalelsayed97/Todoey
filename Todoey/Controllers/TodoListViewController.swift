@@ -2,24 +2,23 @@ import UIKit
 import CoreData
 
 class TodoListViewController: UITableViewController {
-    
-    //    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appending(path: "Items.plist")
+
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     
     var itemsList: [Item] = []
+    var selectedCategory: Category?{
+        didSet{
+                loadItems()
+        }
+    }
     
     
-    //    let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        if let dataFromDB = defaults.object(forKey: "ToDoListArray") as? [Item] {
-        //            itemsList = dataFromDB
-        //        }
-        
-        getItems()
+        loadItems()
         
         tableView.delegate = self
         
@@ -39,6 +38,7 @@ class TodoListViewController: UITableViewController {
     }
     
     //MARK: - create cell
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
@@ -109,10 +109,17 @@ class TodoListViewController: UITableViewController {
     
     //MARK: - get items : R in CRUD
     
-    func getItems (){
-        let request : NSFetchRequest<Item> = Item.fetchRequest()
+    func loadItems (_ request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil){
+       
+        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
         
-        self.loadItem(request)
+        if let addtionalPredicate = predicate {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, addtionalPredicate])
+        }else{
+            request.predicate = categoryPredicate
+        }
+        
+        self.fetchItems(request)
     }
     
     
@@ -133,6 +140,8 @@ class TodoListViewController: UITableViewController {
         nItem.title = title
         
         nItem.done = done
+        
+        nItem.parentCategory = self.selectedCategory
         
         self.itemsList.append(nItem)
         
@@ -174,10 +183,10 @@ extension TodoListViewController: UISearchBarDelegate {
 
                 request.sortDescriptors = [sortDescriptor]
 
-                self.loadItem(request)
+                self.fetchItems(request)
             }else{
                 request.predicate = nil
-                self.loadItem(request)
+                self.fetchItems(request)
             }
         tableView.reloadData()
         DispatchQueue.main.async {
@@ -206,22 +215,22 @@ extension TodoListViewController: UISearchBarDelegate {
                 
                 request.sortDescriptors = [sortDescriptor]
                 
-                self.loadItem(request)
+                self.fetchItems(request)
             }else{
                 request.predicate = nil
-                self.loadItem(request)
+                self.fetchItems(request)
             }
             
-            tableView.reloadData()
             
         
     }
     
-    func loadItem(_ request : NSFetchRequest<Item>){
+    func fetchItems(_ request : NSFetchRequest<Item>){
         do{
              self.itemsList = try context.fetch(request)
         }catch{
             print(error)
         }
+        tableView.reloadData()
     }
 }

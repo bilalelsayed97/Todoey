@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C0BB31F2B9748F600159BB8 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0BB31E2B9748F600159BB8 /* CategoryViewController.swift */; };
 		9C4E11D52B935FDE00CD0B8C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4E11D42B935FDE00CD0B8C /* AppDelegate.swift */; };
 		9C4E11D72B935FDE00CD0B8C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4E11D62B935FDE00CD0B8C /* SceneDelegate.swift */; };
 		9C4E11D92B935FDE00CD0B8C /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4E11D82B935FDE00CD0B8C /* TodoListViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9C0BB31E2B9748F600159BB8 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9C4E11D12B935FDE00CD0B8C /* Todoey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todoey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C4E11D42B935FDE00CD0B8C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C4E11D62B935FDE00CD0B8C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				9C4E11D82B935FDE00CD0B8C /* TodoListViewController.swift */,
+				9C0BB31E2B9748F600159BB8 /* CategoryViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -165,6 +168,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C0BB31F2B9748F600159BB8 /* CategoryViewController.swift in Sources */,
 				9CB33EEE2B958D8700E6ED3C /* DataModel.xcdatamodeld in Sources */,
 				9C4E11D92B935FDE00CD0B8C /* TodoListViewController.swift in Sources */,
 				9C4E11D52B935FDE00CD0B8C /* AppDelegate.swift in Sources */,
